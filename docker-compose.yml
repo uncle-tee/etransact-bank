@@ -1,0 +1,22 @@
+version: "3.5"
+
+services:
+  db:
+    image: postgres
+    environment:
+      - POSTGRES_USER=etransact
+      - POSTGRES_PASSWORD=password123
+      - POSTGRES_DB=etransact_account
+    ports:
+      - "5674:5432"
+  etransact-account-managment:
+    container_name: etransact-account-managment
+    image: etransact-account-managment
+    build: ./
+    depends_on:
+      - db
+    expose:
+      - "4000"
+    ports:
+      - 4000:4000
+
